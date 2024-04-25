@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender System</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+z5vCZ+d8AdOXL9+O6qDSh6BxerjQom5K4y6U2G" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar {
+            background-color: #17a2b8;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffc107;
+        }
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border-color: #17a2b8;
+            border-radius: 30px;
+            font-size: 1rem;
+            padding: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .form-control:focus {
+            background-color: #fff;
+            border-color: #ffc107;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #333;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            padding: 0.75rem 2rem;
+            transition: all 0.3s ease;
+        }
+        .btn-warning:hover {
+            background-color: #ffca28;
+            border-color: #ffca28;
+            color: #333;
+        }
+        .card {
+            background-color: #fff;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card img {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-title {
+            font-weight: bold;
+            color: #333;
+        }
+        .card-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand">My Book Recommender</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/recommend">Recommend</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12 text-center mb-4">
+                <h1 style="font-size: 3rem;">Recommend Books</h1>
+                <form action="/recommend_books" method="post">
+                    <input name="user_input" type="text" class="form-control mt-3" placeholder="Enter your query">
+                    <button type="submit" class="btn btn-warning mt-3">Recommend</button>
+                </form>
+            </div>
+
+            {% if data %}
+            {% for i in data %}
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{{i[2]}}" class="card-img-top" alt="Book Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{i[0]}}</h5>
+                        <p class="card-text">{{i[1]}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-hJf4j3Wha8h+6m2zUMmuWPR9W6hTXm61VCgYjz9M6FpWJwwPjXhU8KRJuFVT9Bnx" crossorigin="anonymous"></script>
+</body>
+</html>
